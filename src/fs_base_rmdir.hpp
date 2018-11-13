@@ -24,11 +24,22 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  rmdir(const std::string &path)
+  namespace base
   {
-    return ::rmdir(path.c_str());
+    static
+    inline
+    int
+    rmdir(const char *path_)
+    {
+      return ::rmdir(path_);
+    }
+
+    static
+    inline
+    int
+    rmdir(const std::string *path_)
+    {
+      return fs::base::rmdir(path_->c_str());
+    }
   }
 }
