@@ -16,15 +16,16 @@
 
 #pragma once
 
-namespace mergerfs
+#include <fuse.h>
+
+#include <sys/types.h>
+
+namespace fuse
 {
-  namespace fuse
-  {
-    int
-    fallocate(const char     *fusepath,
-              int             mode,
-              off_t           offset,
-              off_t           len,
-              fuse_file_info *fi);
-  }
+  int
+  fallocate(const char     *fusepath_,
+            int             mode_,
+            off_t           offset_,
+            off_t           len_,
+            fuse_file_info *ffi_);
 }

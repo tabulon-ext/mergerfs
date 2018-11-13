@@ -16,12 +16,11 @@
 
 #pragma once
 
-namespace mergerfs
+#include <fuse.h>
+
+namespace fuse
 {
-  namespace fuse
-  {
-    int
-    flush(const char     *path,
-          fuse_file_info *fi);
-  }
+  int
+  flush(const char     *path_,
+        fuse_file_info *ffi_);
 }

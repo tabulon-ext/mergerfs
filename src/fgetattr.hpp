@@ -20,13 +20,10 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-namespace mergerfs
+namespace fuse
 {
-  namespace fuse
-  {
-    int
-    fgetattr(const char     *fusepath,
-             struct stat    *st,
-             fuse_file_info *fileinfo);
-  }
+  int
+  fgetattr(const char     *fusepath_,
+           struct stat    *st_,
+           fuse_file_info *fileinfo_);
 }

@@ -16,13 +16,10 @@
 
 #pragma once
 
-namespace mergerfs
+namespace fuse
 {
-  namespace fuse
-  {
-    int
-    flock(const char     *fusepath,
-          fuse_file_info *ffi,
-          int             op);
-  }
+  int
+  flock(const char     *fusepath_,
+        fuse_file_info *ffi_,
+        int             op_);
 }

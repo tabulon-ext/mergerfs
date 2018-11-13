@@ -16,11 +16,8 @@
 
 #pragma once
 
-namespace mergerfs
+namespace fuse
 {
-  namespace fuse
-  {
-    void
-    destroy(void *);
-  }
+  void
+  destroy(void *);
 }

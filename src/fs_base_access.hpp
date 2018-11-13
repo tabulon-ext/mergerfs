@@ -25,33 +25,36 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  access(const int          dirfd,
-         const std::string &path,
-         const int          mode,
-         const int          flags)
+  namespace base
   {
-    return ::faccessat(dirfd,path.c_str(),mode,flags);
-  }
+    static
+    inline
+    int
+    access(const int          dirfd_,
+           const std::string *path_,
+           const int          mode_,
+           const int          flags_)
+    {
+      return ::faccessat(dirfd_,path_->c_str(),mode_,flags_);
+    }
 
-  static
-  inline
-  int
-  access(const std::string &path,
-         const int          mode,
-         const int          flags)
-  {
-    return fs::access(AT_FDCWD,path,mode,flags);
-  }
+    static
+    inline
+    int
+    access(const std::string *path_,
+           const int          mode_,
+           const int          flags_)
+    {
+      return fs::base::access(AT_FDCWD,path_,mode_,flags_);
+    }
 
-  static
-  inline
-  int
-  eaccess(const std::string &path,
-          const int          mode)
-  {
-    return fs::access(path,mode,AT_EACCESS);
+    static
+    inline
+    int
+    eaccess(const std::string *path_,
+            const int          mode_)
+    {
+      return fs::base::access(path_,mode_,AT_EACCESS);
+    }
   }
 }

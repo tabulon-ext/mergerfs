@@ -16,12 +16,9 @@
 
 #pragma once
 
-namespace mergerfs
+namespace fuse
 {
-  namespace fuse
-  {
-    int
-    access(const char *fusepath,
-           int         mask);
-  }
+  int
+  access(const char *fusepath_,
+         int         mask_);
 }

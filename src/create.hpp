@@ -20,13 +20,10 @@
 
 #include <sys/types.h>
 
-namespace mergerfs
+namespace fuse
 {
-  namespace fuse
-  {
-    int
-    create(const char     *fusepath,
-           mode_t          mode,
-           fuse_file_info *ffi);
-  }
+  int
+  create(const char     *fusepath_,
+         mode_t          mode_,
+         fuse_file_info *ffi_);
 }

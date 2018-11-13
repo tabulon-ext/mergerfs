@@ -16,12 +16,9 @@
 
 #pragma once
 
-namespace mergerfs
+namespace fuse
 {
-  namespace fuse
-  {
-    int
-    chmod(const char *fusepath,
-          mode_t      mode);
-  }
+  int
+  chmod(const char *fusepath_,
+        mode_t      mode_);
 }
