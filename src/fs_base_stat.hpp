@@ -26,89 +26,101 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  stat(const char  *path,
-       struct stat &st)
+  namespace base
   {
-    return ::stat(path,&st);
-  }
+    static
+    inline
+    int
+    stat(const char  *path_,
+         struct stat *st_)
+    {
+      return ::stat(path_,st_);
+    }
 
-  static
-  inline
-  int
-  stat(const std::string &path,
-       struct stat       &st)
-  {
-    return fs::stat(path.c_str(),st);
-  }
+    static
+    inline
+    int
+    stat(const std::string *path_,
+         struct stat       *st_)
+    {
+      return fs::base::stat(path_->c_str(),st_);
+    }
 
-  static
-  inline
-  int
-  lstat(const std::string &path,
-        struct stat       &st)
-  {
-    return ::lstat(path.c_str(),&st);
-  }
+    static
+    inline
+    int
+    lstat(const char  *path_,
+          struct stat *st_)
+    {
+      return ::lstat(path_,st_);
+    }
 
-  static
-  inline
-  int
-  fstat(const int    fd,
-        struct stat &st)
-  {
-    return ::fstat(fd,&st);
-  }
+    static
+    inline
+    int
+    lstat(const std::string *path_,
+          struct stat       *st_)
+    {
+      return fs::base::lstat(path_->c_str(),st_);
+    }
 
-  static
-  inline
-  timespec *
-  stat_atime(struct stat &st)
-  {
+    static
+    inline
+    int
+    fstat(const int    fd_,
+          struct stat *st_)
+    {
+      return ::fstat(fd,st);
+    }
+
+    static
+    inline
+    timespec *
+    stat_atime(struct stat *st_)
+    {
 #if __APPLE__
-    return &st.st_atimespec;
+      return &st_->st_atimespec;
 #else
-    return &st.st_atim;
+      return &st_->st_atim;
 #endif
-  }
+    }
 
-  static
-  inline
-  const
-  timespec *
-  stat_atime(const struct stat &st)
-  {
+    static
+    inline
+    const
+    timespec *
+    stat_atime(const struct stat *st_)
+    {
 #if __APPLE__
-    return &st.st_atimespec;
+      return &st_->st_atimespec;
 #else
-    return &st.st_atim;
+      return &st_->st_atim;
 #endif
-  }
+    }
 
-  static
-  inline
-  timespec *
-  stat_mtime(struct stat &st)
-  {
+    static
+    inline
+    timespec *
+    stat_mtime(struct stat *st_)
+    {
 #if __APPLE__
-    return &st.st_mtimespec;
+      return &st_->st_mtimespec;
 #else
-    return &st.st_mtim;
+      return &st_->st_mtim;
 #endif
-  }
+    }
 
-  static
-  inline
-  const
-  timespec *
-  stat_mtime(const struct stat &st)
-  {
+    static
+    inline
+    const
+    timespec *
+    stat_mtime(const struct stat *st_)
+    {
 #if __APPLE__
-    return &st.st_mtimespec;
+      return &st_->st_mtimespec;
 #else
-    return &st.st_mtim;
+      return &st_->st_mtim;
 #endif
+    }
   }
 }

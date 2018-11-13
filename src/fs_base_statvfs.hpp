@@ -32,50 +32,53 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  statvfs(const char     *path,
-          struct statvfs &st)
+  namespace base
   {
-    return ::statvfs(path,&st);
-  }
+    static
+    inline
+    int
+    statvfs(const char     *path_,
+            struct statvfs *st_)
+    {
+      return ::statvfs(path_,st_);
+    }
 
-  static
-  inline
-  int
-  statvfs(const std::string &path,
-          struct statvfs    &st)
-  {
-    return fs::statvfs(path.c_str(),st);
-  }
+    static
+    inline
+    int
+    statvfs(const std::string *path_,
+            struct statvfs    *st_)
+    {
+      return fs::base::statvfs(path_->c_str(),st_);
+    }
 
-  static
-  inline
-  int
-  fstatvfs(const int       fd_,
-           struct statvfs &st_)
-  {
-    return ::fstatvfs(fd_,&st_);
-  }
+    static
+    inline
+    int
+    fstatvfs(const int       fd_,
+             struct statvfs *st_)
+    {
+      return ::fstatvfs(fd_,st_);
+    }
 
-  static
-  inline
-  int
-  lstatvfs(const std::string &path_,
-           struct statvfs    &st_)
-  {
-    int fd;
-    int rv;
+    static
+    inline
+    int
+    lstatvfs(const std::string *path_,
+             struct statvfs    *st_)
+    {
+      int fd;
+      int rv;
 
-    fd = fs::open(path_,O_RDONLY|O_NOFOLLOW|O_PATH);
-    if(fd == -1)
-      return -1;
+      fd = fs::base::open(path_,O_RDONLY|O_NOFOLLOW|O_PATH);
+      if(fd == -1)
+        return -1;
 
-    rv = fs::fstatvfs(fd,st_);
+      rv = fs::base::fstatvfs(fd,st_);
 
-    fs::close(fd);
+      fs::close(fd);
 
-    return rv;
+      return rv;
+    }
   }
 }

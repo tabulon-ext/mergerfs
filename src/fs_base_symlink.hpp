@@ -24,21 +24,33 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  symlink(const std::string &oldpath,
-          const std::string &newpath)
+  namespace base
   {
-    return ::symlink(oldpath.c_str(),newpath.c_str());
-  }
+    static
+    inline
+    int
+    symlink(const char *oldpath_,
+            const char *newpath_)
+    {
+      return ::symlink(oldpath_,newpath_);
+    }
 
-  static
-  inline
-  int
-  symlink(const char        *oldpath,
-          const std::string &newpath)
-  {
-    return ::symlink(oldpath,newpath.c_str());
+    static
+    inline
+    int
+    symlink(const std::string *oldpath_,
+            const std::string *newpath_)
+    {
+      return fs::base::symlink(oldpath_->c_str(),newpath_->c_str());
+    }
+
+    static
+    inline
+    int
+    symlink(const char        *oldpath_,
+            const std::string *newpath_)
+    {
+      return fs::base::symlink(oldpath_,newpath_->c_str());
+    }
   }
 }

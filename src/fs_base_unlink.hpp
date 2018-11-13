@@ -24,19 +24,22 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  unlink(const char *path_)
+  namespace base
   {
-    return ::unlink(path_);
-  }
+    static
+    inline
+    int
+    unlink(const char *path_)
+    {
+      return ::unlink(path_);
+    }
 
-  static
-  inline
-  int
-  unlink(const std::string &path_)
-  {
-    return fs::unlink(path_.c_str());
+    static
+    inline
+    int
+    unlink(const std::string *path_)
+    {
+      return fs::base::unlink(path_->c_str());
+    }
   }
 }

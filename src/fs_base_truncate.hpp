@@ -25,12 +25,24 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  truncate(const std::string &path,
-           const off_t        length)
+  namespace base
   {
-    return ::truncate(path.c_str(),length);
+    static
+    inline
+    int
+    truncate(const char *path_,
+             const off_t length_)
+    {
+      return ::truncate(path_,length_);
+    }
+
+    static
+    inline
+    int
+    truncate(const std::string *path_,
+             const off_t        length_)
+    {
+      return fs::base::truncate(path_->c_str(),length_);
+    }
   }
 }
