@@ -22,11 +22,14 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  close(const int fd)
+  namespace base
   {
-    return ::close(fd);
+    static
+    inline
+    int
+    close(const int fd_)
+    {
+      return ::close(fd_);
+    }
   }
 }
