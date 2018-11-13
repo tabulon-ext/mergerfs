@@ -22,11 +22,14 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  dup(const int fd)
+  namespace base
   {
-    return ::dup(fd);
+    static
+    inline
+    int
+    dup(const int fd_)
+    {
+      return ::dup(fd_);
+    }
   }
 }

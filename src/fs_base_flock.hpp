@@ -22,12 +22,15 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  flock(const int fd,
-        const int operation)
+  namespace base
   {
-    return ::flock(fd,operation);
+    static
+    inline
+    int
+    flock(const int fd_,
+          const int operation_)
+    {
+      return ::flock(fd_,operation_);
+    }
   }
 }

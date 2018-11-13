@@ -21,75 +21,78 @@
 #include "errno.hpp"
 #include "xattr.hpp"
 
-#include <sys/types.h>
-
 #include <string>
+
+#include <sys/types.h>
 
 namespace fs
 {
-  static
-  inline
-  int
-  lgetxattr(const char   *path_,
-            const char   *attrname_,
-            void         *value_,
-            const size_t  size_)
+  namespace base
   {
+    static
+    inline
+    int
+    lgetxattr(const char   *path_,
+              const char   *attrname_,
+              void         *value_,
+              const size_t  size_)
+    {
 #ifdef USE_XATTR
-    return ::lgetxattr(path_,attrname_,value_,size_);
+      return ::lgetxattr(path_,attrname_,value_,size_);
 #else
-    return (errno=ENOTSUP,-1);
+      return (errno=ENOTSUP,-1);
 #endif
-  }
+    }
 
-  static
-  inline
-  int
-  lgetxattr(const std::string &path_,
-            const char        *attrname_,
-            void              *value_,
-            const size_t       size_)
-  {
-    return fs::lgetxattr(path_.c_str(),attrname_,value_,size_);
-  }
+    static
+    inline
+    int
+    lgetxattr(const std::string *path_,
+              const char        *attrname_,
+              void              *value_,
+              const size_t       size_)
+    {
+      return fs::base::lgetxattr(path_->c_str(),attrname_,value_,size_);
+    }
 
-  static
-  inline
-  int
-  lgetxattr(const std::string &path_,
-            const std::string &attrname_,
-            void              *value_,
-            const size_t       size_)
-  {
-    return fs::lgetxattr(path_.c_str(),
-                         attrname_.c_str(),
-                         value_,
-                         size_);
-  }
+    static
+    inline
+    int
+    lgetxattr(const std::string *path_,
+              const std::string *attrname_,
+              void              *value_,
+              const size_t       size_)
+    {
+      return fs::base::lgetxattr(path_.c_str(),
+                                 attrname_.c_str(),
+                                 value_,
+                                 size_);
+    }
 
-  static
-  inline
-  int
-  fgetxattr(const int     fd_,
-            const char   *attrname_,
-            void         *value_,
-            const size_t  size_)
-  {
+    static
+    inline
+    int
+    fgetxattr(const int     fd_,
+              const char   *attrname_,
+              void         *value_,
+              const size_t  size_)
+    {
 #ifdef USE_XATTR
-    return ::fgetxattr(fd_,attrname_,value_,size_);
+      return ::fgetxattr(fd_,attrname_,value_,size_);
 #else
-    return (errno=ENOTSUP,-1);
+      return (errno=ENOTSUP,-1);
 #endif
-  }
+    }
 
-  static
-  inline
-  int
-  fgetxattr(const int          fd_,
-            const std::string &attrname_,
-            void              *value_,
-            const size_t       size_)
-  {
-    return fs::fgetxattr(fd_,attrname_.c_str(),value_,size_);
+    static
+    inline
+    int
+    fgetxattr(const int          fd_,
+              const std::string *attrname_,
+              void              *value_,
+              const size_t       size_)
+    {
+      return fs::base::fgetxattr(fd_,attrname_->c_str(),value_,size_);
+    }
   }
 }

@@ -17,12 +17,16 @@
 #pragma once
 
 #include <fcntl.h>
+#include <sys/types.h>
 
 namespace fs
 {
-  int
-  fallocate(const int   fd,
-            const int   mode,
-            const off_t offset,
-            const off_t len);
+  namespace base
+  {
+    int
+    fallocate(const int   fd_,
+              const int   mode_,
+              const off_t offset_,
+              const off_t len_);
+  }
 }

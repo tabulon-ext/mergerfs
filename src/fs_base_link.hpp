@@ -24,12 +24,15 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  link(const std::string &oldpath,
-       const std::string &newpath)
+  namespace base
   {
-    return ::link(oldpath.c_str(),newpath.c_str());
+    static
+    inline
+    int
+    link(const std::string *oldpath_,
+         const std::string *newpath_)
+    {
+      return ::link(oldpath_->c_str(),newpath_->c_str());
+    }
   }
 }

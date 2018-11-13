@@ -23,11 +23,14 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  dirfd(DIR *dirp)
+  namespace base
   {
-    return ::dirfd(dirp);
+    static
+    inline
+    int
+    dirfd(DIR *dirp_)
+    {
+      return ::dirfd(dirp_);
+    }
   }
 }

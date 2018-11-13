@@ -21,47 +21,50 @@
 #include "errno.hpp"
 #include "xattr.hpp"
 
-#include <sys/types.h>
-
 #include <string>
+
+#include <sys/types.h>
 
 namespace fs
 {
-  static
-  inline
-  int
-  llistxattr(const char   *path_,
-             char         *list_,
-             const size_t  size_)
+  namespace base
   {
+    static
+    inline
+    int
+    llistxattr(const char   *path_,
+               char         *list_,
+               const size_t  size_)
+    {
 #ifdef USE_XATTR
-    return ::llistxattr(path_,list_,size_);
+      return ::llistxattr(path_,list_,size_);
 #else
-    return (errno=ENOTSUP,-1);
+      return (errno=ENOTSUP,-1);
 #endif
-  }
+    }
 
-  static
-  inline
-  int
-  llistxattr(const std::string &path_,
-             char              *list_,
-             const size_t       size_)
-  {
-    return fs::llistxattr(path_.c_str(),list_,size_);
-  }
+    static
+    inline
+    int
+    llistxattr(const std::string *path_,
+               char              *list_,
+               const size_t       size_)
+    {
+      return fs::base::llistxattr(path_->c_str(),list_,size_);
+    }
 
-  static
-  inline
-  int
-  flistxattr(const int     fd_,
-             char         *list_,
-             const size_t  size_)
-  {
+    static
+    inline
+    int
+    flistxattr(const int     fd_,
+               char         *list_,
+               const size_t  size_)
+    {
 #ifdef USE_XATTR
-    return ::flistxattr(fd_,list_,size_);
+      return ::flistxattr(fd_,list_,size_);
 #else
-    return (errno=ENOTSUP,-1);
+      return (errno=ENOTSUP,-1);
 #endif
+    }
   }
 }

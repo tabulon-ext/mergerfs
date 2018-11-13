@@ -23,12 +23,15 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  ftruncate(const int   fd,
-            const off_t size)
+  namespace base
   {
-    return ::ftruncate(fd,size);
+    static
+    inline
+    int
+    ftruncate(const int   fd_,
+              const off_t size_)
+    {
+      return ::ftruncate(fd_,size_);
+    }
   }
 }

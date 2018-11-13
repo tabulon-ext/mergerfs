@@ -23,11 +23,14 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  closedir(DIR *dirp)
+  namespace base
   {
-    return ::closedir(dirp);
+    static
+    inline
+    int
+    closedir(DIR *dirp_)
+    {
+      return ::closedir(dirp_);
+    }
   }
 }

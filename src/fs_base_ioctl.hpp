@@ -22,23 +22,26 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  ioctl(const int            fd_,
-        const unsigned long  request_,
-        void                *data_)
+  namespace base
   {
-    return ::ioctl(fd_,request_,data_);
-  }
+    static
+    inline
+    int
+    ioctl(const int            fd_,
+          const unsigned long  request_,
+          void                *data_)
+    {
+      return ::ioctl(fd_,request_,data_);
+    }
 
-  static
-  inline
-  int
-  ioctl(const int           fd_,
-        const unsigned long request_,
-        const int           int_)
-  {
-    return ::ioctl(fd_,request_,int_);
+    static
+    inline
+    int
+    ioctl(const int           fd_,
+          const unsigned long request_,
+          const int           int_)
+    {
+      return ::ioctl(fd_,request_,int_);
+    }
   }
 }

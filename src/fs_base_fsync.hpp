@@ -18,33 +18,18 @@
 
 #pragma once
 
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE
-#endif
-
-#include "errno.hpp"
-
 #include <unistd.h>
 
 namespace fs
 {
-  static
-  inline
-  int
-  fsync(const int fd)
+  namespace base
   {
-    return ::fsync(fd);
-  }
-
-  static
-  inline
-  int
-  fdatasync(const int fd)
-  {
-#if _POSIX_SYNCHRONIZED_IO > 0
-    return ::fdatasync(fd);
-#else
-    return (errno=ENOSYS,-1);
-#endif
+    static
+    inline
+    int
+    fsync(const int fd_)
+    {
+      return ::fsync(fd_);
+    }
   }
 }
