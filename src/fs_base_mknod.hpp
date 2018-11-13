@@ -25,13 +25,16 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  mknod(const std::string &path,
-        const mode_t       mode,
-        const dev_t        dev)
+  namespace base
   {
-    return ::mknod(path.c_str(),mode,dev);
+    static
+    inline
+    int
+    mknod(const std::string *path_,
+          const mode_t       mode_,
+          const dev_t        dev_)
+    {
+      return ::mknod(path_->c_str(),mode_,dev_);
+    }
   }
 }

@@ -25,20 +25,23 @@
 
 namespace fs
 {
-  static
-  inline
-  char *
-  realpath(const std::string &path,
-           char              *resolved_path)
+  namespace base
   {
-    return ::realpath(path.c_str(),resolved_path);
-  }
+    static
+    inline
+    char *
+    realpath(const std::string *path_,
+             char              *resolved_path_)
+    {
+      return ::realpath(path_->c_str(),resolved_path_);
+    }
 
-  static
-  inline
-  char *
-  realpath(const std::string &path)
-  {
-    return fs::realpath(path,NULL);
+    static
+    inline
+    char *
+    realpath(const std::string *path_)
+    {
+      return fs::realpath(path_,NULL);
+    }
   }
 }

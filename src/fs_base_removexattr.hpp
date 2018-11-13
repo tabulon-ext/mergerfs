@@ -18,23 +18,35 @@
 
 #pragma once
 
-#include <sys/types.h>
-
 #include "errno.hpp"
 #include "xattr.hpp"
 
+#include <sys/types.h>
+
 namespace fs
 {
-  static
-  inline
-  int
-  lremovexattr(const std::string &path,
-               const char        *attrname)
+  namespace base
   {
+    static
+    inline
+    int
+    lremovexattr(const char *path_,
+                 const char *attrname_)
+    {
 #ifdef USE_XATTR
-    return ::lremovexattr(path.c_str(),attrname);
+      return ::lremovexattr(path_,attrname_);
 #else
-    return (errno=ENOTSUP,-1);
+      return (errno=ENOTSUP,-1);
 #endif
+    }
+
+    static
+    inline
+    int
+    lremovexattr(const std::string *path_,
+                 const char        *attrname_)
+    {
+      return fs::base::lremovexattr(path_->c_str(),attrname_);
+    }
   }
 }

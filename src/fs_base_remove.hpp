@@ -24,11 +24,14 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  remove(const std::string &pathname)
+  namespace base
   {
-    return ::remove(pathname.c_str());
+    static
+    inline
+    int
+    remove(const std::string *pathname_)
+    {
+      return ::remove(pathname_->c_str());
+    }
   }
 }

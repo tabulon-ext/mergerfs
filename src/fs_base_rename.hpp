@@ -22,21 +22,24 @@
 
 namespace fs
 {
-  static
-  inline
-  int
-  rename(const char *oldpath_,
-         const char *newpath_)
+  namespace base
   {
-    return ::rename(oldpath_,newpath_);
-  }
+    static
+    inline
+    int
+    rename(const char *oldpath_,
+           const char *newpath_)
+    {
+      return ::rename(oldpath_,newpath_);
+    }
 
-  static
-  inline
-  int
-  rename(const std::string &oldpath_,
-         const std::string &newpath_)
-  {
-    return fs::rename(oldpath_.c_str(),newpath_.c_str());
+    static
+    inline
+    int
+    rename(const std::string *oldpath_,
+           const std::string *newpath_)
+    {
+      return fs::base::rename(oldpath_->c_str(),newpath_->c_str());
+    }
   }
 }

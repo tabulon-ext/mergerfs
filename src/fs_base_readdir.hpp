@@ -22,11 +22,14 @@
 
 namespace fs
 {
-  static
-  inline
-  struct dirent *
-  readdir(DIR *dirp)
+  namespace base
   {
-    return ::readdir(dirp);
+    static
+    inline
+    struct dirent *
+    readdir(DIR *dirp_)
+    {
+      return ::readdir(dirp_);
+    }
   }
 }

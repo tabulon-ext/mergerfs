@@ -23,13 +23,16 @@
 
 namespace fs
 {
-  static
-  inline
-  off_t
-  lseek(const int   fd,
-        const off_t offset,
-        const int   whence)
+  namespace base
   {
-    return ::lseek(fd,offset,whence);
+    static
+    inline
+    off_t
+    lseek(const int   fd_,
+          const off_t offset_,
+          const int   whence_)
+    {
+      return ::lseek(fd_,offset_,whence_);
+    }
   }
 }

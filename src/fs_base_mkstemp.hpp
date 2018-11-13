@@ -18,30 +18,33 @@
 
 #pragma once
 
+#include <string>
+
 #include <stdlib.h>
 #include <string.h>
 
-#include <string>
-
 namespace fs
 {
-  static
-  inline
-  int
-  mkstemp(std::string &filepath)
+  namespace base
   {
-    int fd;
-    char buf[filepath.size()+8];
+    static
+    inline
+    int
+    mkstemp(std::string *filepath_)
+    {
+      int fd;
+      char buf[filepath_->size()+8];
 
-    strcpy(buf,filepath.c_str());
-    strcpy(buf+filepath.size(),".XXXXXX");
+      strcpy(buf,filepath_->c_str());
+      strcpy(buf+filepath_->size(),".XXXXXX");
 
-    fd = ::mkstemp(buf);
-    if(fd == -1)
-      return -1;
+      fd = ::mkstemp(buf);
+      if(fd == -1)
+        return -1;
 
-    filepath = buf;
+      *filepath_ = buf;
 
-    return fd;
+      return fd;
+    }
   }
 }

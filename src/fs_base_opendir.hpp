@@ -25,11 +25,14 @@
 
 namespace fs
 {
-  static
-  inline
-  DIR *
-  opendir(const std::string &name)
+  namespace base
   {
-    return ::opendir(name.c_str());
+    static
+    inline
+    DIR*
+    opendir(const std::string *name_)
+    {
+      return ::opendir(name_->c_str());
+    }
   }
 }

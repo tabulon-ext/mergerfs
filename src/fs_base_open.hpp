@@ -18,49 +18,52 @@
 
 #pragma once
 
+#include <string>
+
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include <string>
-
 namespace fs
 {
-  static
-  inline
-  int
-  open(const char *path_,
-       const int   flags_)
+  namespace base
   {
-    return ::open(path_,flags_);
-  }
+    static
+    inline
+    int
+    open(const char *path_,
+         const int   flags_)
+    {
+      return ::open(path_,flags_);
+    }
 
-  static
-  inline
-  int
-  open(const char   *path_,
-       const int     flags_,
-       const mode_t  mode_)
-  {
-    return ::open(path_,flags_,mode_);
-  }
+    static
+    inline
+    int
+    open(const char   *path_,
+         const int     flags_,
+         const mode_t  mode_)
+    {
+      return ::open(path_,flags_,mode_);
+    }
 
-  static
-  inline
-  int
-  open(const std::string &path_,
-       const int          flags_)
-  {
-    return fs::open(path_.c_str(),flags_);
-  }
+    static
+    inline
+    int
+    open(const std::string *path_,
+         const int          flags_)
+    {
+      return fs::base::open(path_->c_str(),flags_);
+    }
 
-  static
-  inline
-  int
-  open(const std::string &path_,
-       const int          flags_,
-       const mode_t       mode_)
-  {
-    return fs::open(path_.c_str(),flags_,mode_);
+    static
+    inline
+    int
+    open(const std::string *path_,
+         const int          flags_,
+         const mode_t       mode_)
+    {
+      return fs::base::open(path_->c_str(),flags_,mode_);
+    }
   }
 }
