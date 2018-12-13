@@ -20,7 +20,7 @@
 #include "fs_base_statvfs.hpp"
 #include "fs_info_t.hpp"
 #include "fs_path.hpp"
-#include "statfs_cache.hpp"
+#include "statvfs_cache.hpp"
 #include "statvfs_util.hpp"
 
 #include <stdint.h>
