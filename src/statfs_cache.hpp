@@ -21,7 +21,7 @@ namespace StatFS
   namespace Cache
   {
     int
-    statfs(const char     *path_,
-           struct statvfs *st_);
+    statvfs(const char     *path_,
+            struct statvfs *st_);
   }
 }
