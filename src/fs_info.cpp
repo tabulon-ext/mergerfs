@@ -38,7 +38,7 @@ namespace fs
     int rv;
     struct statvfs st;
 
-    rv = StatFS::Cache::statvfs(path_->c_str(),&st);
+    rv = StatVFS::Cache::statvfs(path_->c_str(),&st);
     if(rv == 0)
       {
         info_->readonly   = StatVFS::readonly(st);

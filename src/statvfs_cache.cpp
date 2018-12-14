@@ -26,7 +26,7 @@
 
 static pthread_rwlock_t g_statvfs_cache_lock = PTHREAD_RWLOCK_INITIALIZER;
 
-namespace StatFS
+namespace StatVFS
 {
   namespace Cache
   {
